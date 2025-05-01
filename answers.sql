@@ -29,13 +29,13 @@ CREATE TABLE OrderDetails (
 );
 
 
-INSERT INTO OrderDetails (OrderID, CustomerName, Product, Quantity) VALUES
-(101, 'Jane Smith', 'IPhone', 2),
-(101, 'Derrick Jones', 'Mouse', 1),
-(102, 'Ellan Ronadlo', 'Tablet', 3),
-(102, 'Evans James', 'Keyboard', 1),
-(102, 'John Matthews', 'Mouse', 2),
-(103, 'Caleb Makayla', 'Phone', 1);
+INSERT INTO OrderDetails (OrderID, CustomerName, Product, Quantity)
+VALUES(101, 'Jane Smith', 'IPhone', 2),
+       (101, 'Derrick Jones', 'Mouse', 1),
+       (102, 'Ellan Ronadlo', 'Tablet', 3),
+       (102, 'Evans James', 'Keyboard', 1),
+       (102, 'John Matthews', 'Mouse', 2),
+       (103, 'Caleb Makayla', 'Phone', 1);
 
 CREATE TABLE Orders (
     OrderID INT PRIMARY KEY,
