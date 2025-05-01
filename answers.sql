@@ -6,10 +6,10 @@ CREATE TABLE ProductDetail (
 );
 
 
-INSERT INTO ProductDetail (OrderID, CustomerName, Products) VALUES
-(101, 'Nattan Nelsons', 'Laptop, Mouse'),
-(102, 'Caleb Stevens', 'Tablet, Keyboard, Mouse'),
-(103, 'Cedric Mathews', 'Phone');
+INSERT INTO ProductDetail (OrderID, CustomerName, Products) 
+ VALUES (101, 'Nattan Nelsons', 'Laptop, Mouse'),
+        (102, 'Caleb Stevens', 'Tablet, Keyboard, Mouse'),
+        (103, 'Cedric Mathews', 'Phone');
 
 
 CREATE TABLE numbers (
