@@ -1,59 +1,61 @@
--- Question 1
-CREATE TABLE ProductDetail (
+-- Question1
+CREATE TABLE ProductDetail_1NF (
     OrderID INT,
-    CustomerName VARCHAR(50),
-    Products VARCHAR(100)
+    CustomerName VARCHAR(255),
+    Product VARCHAR(255)
 );
 
 
-INSERT INTO ProductDetail (OrderID, CustomerName, Products) 
- VALUES (101, 'Nattan Nelsons', 'Laptop, Mouse'),
-        (102, 'Caleb Stevens', 'Tablet, Keyboard, Mouse'),
-        (103, 'Cedric Mathews', 'Phone');
+INSERT INTO ProductDetail_1NF (OrderID, CustomerName, Product) VALUES
+(89, 'Jacob Matthews', 'Laptop'),
+(90, 'Issabel Daysen', 'Mouse'),
+(91, 'Evans Jasons', 'Tablet'),
+(98, 'Brenda Mandela', 'Keyboard'),
+(92, 'Iran Mackyla', 'Mouse'),
+(93, 'Iyan Reigns', 'Phone');
 
 
-CREATE TABLE numbers (
-    n INT PRIMARY KEY
+SELECT * FROM ProductDetail_1NF;
+
+-- Question2
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY AUTO_INCREMENT,
+    CustomerName VARCHAR(255) UNIQUE
 );
 
-
-INSERT INTO numbers (n) 
-VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10);
-
--- Question 2
-CREATE TABLE OrderDetails (
-    OrderID INT,
-    CustomerName VARCHAR(50),
-    Product VARCHAR(50),
-    Quantity INT
-);
-
-
-INSERT INTO OrderDetails (OrderID, CustomerName, Product, Quantity)
-VALUES(101, 'Jane Smith', 'IPhone', 2),
-       (101, 'Derrick Jones', 'Mouse', 1),
-       (102, 'Ellan Ronadlo', 'Tablet', 3),
-       (102, 'Evans James', 'Keyboard', 1),
-       (102, 'John Matthews', 'Mouse', 2),
-       (103, 'Caleb Makayla', 'Phone', 1);
 
 CREATE TABLE Orders (
     OrderID INT PRIMARY KEY,
-    CustomerName VARCHAR(50)
+    CustomerID INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 
 
-INSERT INTO Orders (OrderID, CustomerName)
-SELECT DISTINCT OrderID, CustomerName FROM OrderDetails;
-
-CREATE TABLE OrderProducts (
+CREATE TABLE OrderItems (
+    OrderItemID INT PRIMARY KEY AUTO_INCREMENT,
     OrderID INT,
-    Product VARCHAR(50),
+    Product VARCHAR(255),
     Quantity INT,
-    PRIMARY KEY (OrderID, Product),
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
 );
 
 
-INSERT INTO OrderProducts (OrderID, Product, Quantity)
-SELECT OrderID, Product, Quantity FROM OrderDetails;
+INSERT INTO Customers (CustomerName)
+SELECT DISTINCT CustomerName
+FROM OrderDetails;
+
+
+INSERT INTO Orders (OrderID, CustomerID)
+SELECT DISTINCT od.OrderID, c.CustomerID
+FROM OrderDetails od
+JOIN Customers c ON od.CustomerName = c.CustomerName;
+
+
+INSERT INTO OrderItems (OrderID, Product, Quantity)
+SELECT OrderID, Product, Quantity
+FROM OrderDetails;
+
+
+SELECT * FROM Customers;
+SELECT * FROM Orders;
+SELECT * FROM OrderItems;
